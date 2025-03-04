@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Maestro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #7f00ff, #e100ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .input-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        .playlist-input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            padding: 1.5rem 2rem;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #7f00ff, #e100ff);
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .option-btn:nth-child(2) {
+            background: linear-gradient(45deg, #00b4d8, #0077b6);
+        }
+
+        .loading {
+            display: none;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .fa-spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 255, 157, 0.1);
+            border-radius: 10px;
+            border: 1px solid #00ff9d;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .option-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Playlist Maestro</h1>
+            <p>Transform your playlists with style</p>
+        </div>
+
+        <div class="input-section">
+            <input type="text" class="playlist-input" placeholder="Enter Spotify Playlist URL...">
+            <div class="options">
+                <button class="option-btn" onclick="rearrange('genre')">
+                    <i class="fas fa-music"></i>
+                    Arrange by Genre
+                </button>
+                <button class="option-btn" onclick="rearrange('artist')">
+                    <i class="fas fa-user"></i>
+                    Arrange by Artist
+                </button>
+            </div>
+        </div>
+
+        <div class="loading">
+            <i class="fas fa-spinner"></i> Crafting your perfect playlist...
+        </div>
+
+        <div class="result">
+            Playlist successfully rearranged! 🎉
+        </div>
+    </div>
+
+    <script>
+        function rearrange(type) {
+            const url = document.querySelector('.playlist-input').value;
+            const loading = document.querySelector('.loading');
+            const result = document.querySelector('.result');
+
+            if (!url) {
+                alert('Please enter a playlist URL');
+                return;
+            }
+
+            loading.style.display = 'block';
+            result.style.display = 'none';
+
+            // Simulated processing delay
+            setTimeout(() => {
+                loading.style.display = 'none';
+                result.style.display = 'block';
+            }, 2000);
+
+            // In real implementation, you would:
+            // 1. Authenticate with Spotify API
+            // 2. Fetch playlist tracks
+            // 3. Sort tracks based on selected type
+            // 4. Create new playlist with sorted tracks
+        }
+    </script>
+</body>
+</html>
